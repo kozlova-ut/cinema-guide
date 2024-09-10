@@ -1,0 +1,26 @@
+@import 'normalize.css';
+@import '@/assets/scss/variables.scss';
+@import '@/assets/scss/mixins.scss';
+@import '@/assets/scss/fonts.scss';
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Play-Regular', sans-serif;
+	color: #ffffff;
+	background: $black;
+}
+
+.container {
+	max-width: 1440px;
+	margin: 0px auto;
+	padding: 0px 80px;
+}
+
+a {
+	text-decoration: none;
+}
