@@ -16,11 +16,19 @@ body {
 }
 
 .container {
-	max-width: 1440px;
+	max-width: 1360px;
 	margin: 0px auto;
-	padding: 0px 80px;
+	padding: 0px 40px;
+
+	@media ($point425) {
+		padding: 0px 20px;
+	}
 }
 
 a {
 	text-decoration: none;
+}
+
+button {
+	padding: 0;
 }

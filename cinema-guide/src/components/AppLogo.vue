@@ -77,6 +77,14 @@
 <style lang="scss" scoped>
 @import '@/assets/scss/variables';
 
+svg {
+	width: 240px;
+
+	@media ($point425) {
+		width: 136px;
+	}
+}
+
 linearGradient {
 
 	stop:first-child {
