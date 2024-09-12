@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 import AppLogo from './AppLogo.vue';
-import AppSearch from './AppSearch.vue';
+import AppSearch from '@/components/AppSearch.vue';
 import { useBreakpointsStore } from '@/stores/breakpoints';
 
 const breakpointsStore = useBreakpointsStore();
@@ -41,6 +41,11 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 @import '@/assets/scss/variables.scss';
 
 .header {
+	position: sticky;
+	top: 0;
+	z-index: 100;
+	background: rgba(#000000, 0.9);
+
 	&__content {
 		width: 100%;
 		display: flex;

@@ -1,9 +1,18 @@
 <script setup lang="ts">
+import MovieBanner from '@/components/MovieBanner.vue';
+
+
 
 </script>
 
 <template>
 	<main>
-		<TheWelcome />
+		<MovieBanner/>
 	</main>
 </template>
+
+<style>
+
+</style>
+
+

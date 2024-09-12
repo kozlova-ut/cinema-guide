@@ -1,3 +1,4 @@
+
 @mixin zxcvbn1 { // AppHeader / a
 	font-size: 24px;
 	line-height: 32px;
@@ -8,4 +9,10 @@
 	font-size: 18px;
 	line-height: 24px;
 	color: #ffffff;
+}
+
+@mixin zxcvbn3 { //MovieBanner / title
+	font-family: 'Play-Bold', sans-serif;
+	font-size: 48px;
+	line-height: 56px;
 }
