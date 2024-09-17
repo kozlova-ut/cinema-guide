@@ -20,7 +20,7 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 						<RouterLink to="/" v-if="!breakpoints.point768">
 							Главная
 						</RouterLink>
-						<RouterLink class="genres" to="/about">
+						<RouterLink class="genres" to="/genres">
 							<img v-if="breakpoints.point768" src="@/assets/img/genres.svg" alt="Жанры">
 							<span v-else>Жанры</span>
 						</RouterLink>

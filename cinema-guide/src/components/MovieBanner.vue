@@ -1,36 +1,55 @@
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useBreakpointsStore } from '@/stores/breakpoints';
+import type { IMovie } from '@/types/movie';
+import { getRandomMovie } from '@/api/movies';
+import { formatRating, formatDuration } from '@/utils/formatters';
+
+
 const breakpointsStore = useBreakpointsStore();
 const breakpoints = computed(() => breakpointsStore.breakpoints);
-	
+
+const movie = ref<IMovie>();
+
+const loadRandomMovie = async() => {
+	const response = await getRandomMovie();
+	console.log(response);
+	if (response) {
+		movie.value = response;
+	}	
+}
+
+onMounted(() => {
+    loadRandomMovie();
+});
+
 </script>
 
 <template>
-	<div class="banner">
+	<div class="banner" v-if="movie"> <!-- подумать что будет если фильм не загрузится -->
 		<div class="movie__image">
-			<div class="img"></div>
+			<div class="img" :style="{backgroundImage: `url(${movie.posterUrl})`}"></div>
 			<div class="overlay"></div>
 		</div>
 		<div class="movie__info">
 			<div class="content">
 				<div class="info">
-					<div class="rating">7,5</div>
-					<div class="year">1979</div>
-					<div class="genre">детектив</div>
-					<div class="duration">1 ч 7 мин</div>
+					<div class="rating">{{ formatRating(movie.tmdbRating) }}</div>
+					<div class="year">{{ movie.releaseYear }}</div>
+					<div class="genre">{{ movie.genres[0] }}</div>
+					<div class="duration">{{ formatDuration(movie.runtime) }}</div>
 				</div>
 				<h2 class="title">
-					Шерлок Холмс и доктор Ватсон: Знакомство
+					{{ movie.title }}
 				</h2>
-				<span class="description">Увлекательные приключения самого известного сыщика всех времен</span>
-				<div class="buttons">
+				<span class="description">{{ movie.plot }}</span>
+				<div class="buttons"> <!-- добавить признак отображения кнопок на главной -->
 					<button :class="['trailer', 'wide', 'accent', {'width100': breakpoints.point768}]">Трейлер</button>
 					<button class="about wide">О фильме</button>
 					<button class="favourites round">
 						<img src="@/assets/img/favorites.svg" alt="add to favorites">
 					</button>
-					<button class="random round">
+					<button class="random round" @click="loadRandomMovie">
 						<img src="@/assets/img/random.svg" alt="show a random movie">
 					</button>
 				</div>
@@ -71,6 +90,11 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 		}
 
 		.description {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			overflow: hidden;
+			text-overflow: ellipsis;
 			@include zxcvbn1;
 			opacity: 0.7;
 		}
@@ -87,7 +111,7 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 			}
 
 			.rating {
-				@include rating($green);
+				@include rating($green); // реализовать смену цветов в зависимости от рейтинга
 			}
 		}
 
@@ -104,10 +128,16 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 			@media ($point1024) {
 				margin-top: 20px;
 			}
+
+			@media ($point425) {
+				margin-top: 32px;
+				justify-content: space-between;
+			}
 		}
 
 		@media ($point1024) {
 			padding: 0px 40px;
+			bottom: auto;
 		}
 
 		@media ($point768) {
@@ -131,7 +161,7 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 		.img {
 			width: 100%;
 			height: 100%;
-			background: url('@/assets/img/banner.png') no-repeat;
+			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
 		}
@@ -154,6 +184,4 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 		}
 	}
 }
-
-
 </style>

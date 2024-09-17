@@ -73,6 +73,7 @@
 	border: none;
 	border-radius: 28px;
 	@include zxcvbn4;
+	cursor: pointer;
 	
 	&.accent {
 		background: $accent-main;
@@ -80,6 +81,11 @@
 
 	&.wide {
 		padding: 16px 48px;
+
+		@media ($point425) {
+			flex-grow: 1;
+			padding: 16px 22px;
+		}
 	}
 
 	&.round {
