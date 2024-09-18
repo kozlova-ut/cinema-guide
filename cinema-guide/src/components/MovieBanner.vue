@@ -4,23 +4,38 @@ import { useBreakpointsStore } from '@/stores/breakpoints';
 import type { IMovie } from '@/types/movie';
 import { getRandomMovie } from '@/api/movies';
 import { formatRating, formatDuration } from '@/utils/formatters';
-
+import { useRoute, RouterLink } from 'vue-router';
 
 const breakpointsStore = useBreakpointsStore();
 const breakpoints = computed(() => breakpointsStore.breakpoints);
 
-const movie = ref<IMovie>();
+const movie = ref<IMovie | null>(null);
 
-const loadRandomMovie = async() => {
-	const response = await getRandomMovie();
-	console.log(response);
-	if (response) {
-		movie.value = response;
-	}	
+const props = defineProps<{
+	currentMovie?: IMovie;
+}>();
+
+const route = useRoute();
+
+
+const loadMovie = async () => {
+	if (props.currentMovie) {
+		movie.value = props.currentMovie;
+	}
+	else {
+		const response = await getRandomMovie();
+		if (response) {
+			movie.value = response;
+		}
+	}
 }
 
+const isHomePage = computed(() => {
+    return route.name === 'home'; 
+}); 
+
 onMounted(() => {
-    loadRandomMovie();
+	loadMovie();
 });
 
 </script>
@@ -43,13 +58,17 @@ onMounted(() => {
 					{{ movie.title }}
 				</h2>
 				<span class="description">{{ movie.plot }}</span>
-				<div class="buttons"> <!-- добавить признак отображения кнопок на главной -->
-					<button :class="['trailer', 'wide', 'accent', {'width100': breakpoints.point768}]">Трейлер</button>
-					<button class="about wide">О фильме</button>
-					<button class="favourites round">
+				<div class="buttons">
+					<button :class="['button', 'trailer', 'wide', 'accent', {'width100': breakpoints.point768 && isHomePage, 'flexgrow1': breakpoints.point768 && !isHomePage}]">
+						Трейлер
+					</button>
+					<RouterLink :to="`/movie/${movie?.id}`" class="button about wide" v-if="isHomePage">
+						О фильме
+					</RouterLink>
+					<button class="button favourites round">
 						<img src="@/assets/img/favorites.svg" alt="add to favorites">
 					</button>
-					<button class="random round" @click="loadRandomMovie">
+					<button class="button random round" @click="loadMovie" v-if="isHomePage">
 						<img src="@/assets/img/random.svg" alt="show a random movie">
 					</button>
 				</div>
@@ -121,7 +140,7 @@ onMounted(() => {
 			gap: 16px;
 			margin-top: 60px;
 
-			button {
+			.button {
 				@include button;
 			}
 
@@ -137,7 +156,6 @@ onMounted(() => {
 
 		@media ($point1024) {
 			padding: 0px 40px;
-			bottom: auto;
 		}
 
 		@media ($point768) {

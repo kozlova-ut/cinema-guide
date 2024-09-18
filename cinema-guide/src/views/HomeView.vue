@@ -5,7 +5,7 @@ import MovieBanner from '@/components/MovieBanner.vue';
 
 <template>
 	<main>
-		<MovieBanner/>
+		<MovieBanner />
 		Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius laborum, animi sed cumque delectus vitae corrupti consectetur. Dolore numquam eius, corrupti, at soluta culpa voluptate quidem quae eum necessitatibus similique?
 		Harum ipsum, cupiditate quia excepturi repellendus vero asperiores totam blanditiis, saepe reprehenderit nostrum quae. Sit exercitationem eligendi necessitatibus saepe debitis facilis nemo magni architecto id consequatur eius quo, accusantium ipsa?
 		Vero at ab deserunt omnis et eveniet ea vel maxime error labore! Corrupti obcaecati, aspernatur, error labore facere architecto voluptatibus ab repellat veniam eum dolores? In harum rem esse optio?

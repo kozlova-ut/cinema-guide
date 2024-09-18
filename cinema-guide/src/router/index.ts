@@ -13,7 +13,12 @@ const router = createRouter({
 			path: '/genres',
 			name: 'genres',
 				component: () => import('../views/GenresView.vue')
-		}
+		},
+		{
+			path: '/movie/:id',
+			name: 'movie',
+				component: () => import('../views/MovieView.vue')
+		},
 	]
 })
 
