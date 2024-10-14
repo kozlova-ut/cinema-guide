@@ -46,99 +46,43 @@ onMounted(() => {
 			<div class="w-full h-full bg-no-repeat bg-cover bg-center" :style="{backgroundImage: `url(${movie.posterUrl})`}"></div>
 			<div class="overlay overlay-gradient absolute top-0 w-full h-full"></div>
 		</div>
-		<div class="movie__info py-6 px-5 md:relative md:max-w-screen-md lg:absolute lg:top-0 lg:bottom-0 lg:left-0 lg:px-20 lg:flex lg:items-center">
-			<div>
-				<div class="info">
-					<div class="rating">{{ formatRating(movie.tmdbRating) }}</div>
-					<div class="year">{{ movie.releaseYear }}</div>
-					<div class="genre">{{ movie.genres[0] }}</div>
-					<div class="duration">{{ formatDuration(movie.runtime) }}</div>
-				</div>
-				<h2 class="title">
-					{{ movie.title }}
-				</h2>
-				<span class="description">{{ movie.plot }}</span>
-				<div class="buttons">
-					<button :class="['button', 'trailer', 'wide', 'accent', {'width100': breakpoints.point768 && isHomePage, 'flexgrow1': breakpoints.point768 && !isHomePage}]">
-						Трейлер
-					</button>
-					<RouterLink :to="`/movie/${movie?.id}`" class="button about wide" v-if="isHomePage">
-						О фильме
-					</RouterLink>
-					<button class="button favourites round">
-						<img src="@/assets/img/favorites.svg" alt="add to favorites">
-					</button>
-					<button class="button random round" @click="loadMovie" v-if="isHomePage">
-						<img src="@/assets/img/random.svg" alt="show a random movie">
-					</button>
+		<div class="aspect-[2.465753424657534] relative flex items-center">
+			<div class="wrapper">
+				<div class="py-6 max-w-[600px]">
+					<div class="flex gap-4 items-center">
+						<div :class="['flex gap-1 px-3 py-1 rounded-2xl font-play-bold text-lg/6', 
+							{'bg-rating-red': movie.tmdbRating < 5,
+								'bg-rating-gray': movie.tmdbRating >= 5 && movie.tmdbRating < 7,
+								'bg-rating-green': movie.tmdbRating >= 7 && movie.tmdbRating < 8.5,
+								'bg-rating-gold': movie.tmdbRating >= 8.5 
+							}]">
+							<img src="@/assets/img/star.svg" alt="star">
+							{{ formatRating(movie.tmdbRating) }}
+						</div>
+						<div class="text-sm xs:text-lg/6 opacity-70">{{ movie.releaseYear }}</div>
+						<div class="text-sm xs:text-lg/6 opacity-70">{{ movie.genres[0] }}</div>
+						<div class="text-sm xs:text-lg/6 opacity-70">{{ formatDuration(movie.runtime) }}</div>
+					</div>
+					<h2 class="my-3 md:my-4 font-play-bold text-2xl md:text-5xl">
+						{{ movie.title }}
+					</h2>
+					<span class="text-lg/6 md:text-2xl opacity-70 md:line-clamp-2">{{ movie.plot }}</span>
+					<div class="mt-8 md:mt-[60px] flex gap-4 flex-wrap">
+						<button :class="['button bg-accent-main sm:px-12',  {'w-full': isHomePage && !breakpoints.sm, 'grow': !isHomePage && !breakpoints.md}]">
+							Трейлер
+						</button>
+						<RouterLink :to="`/movie/${movie?.id}`" class="button grow sm:grow-0 sm:px-12" v-if="isHomePage">
+							О фильме
+						</RouterLink>
+						<button class="button">
+							<img src="@/assets/img/favorites.svg" alt="add to favorites">
+						</button>
+						<button class="button" @click="loadMovie" v-if="isHomePage">
+							<img src="@/assets/img/random.svg" alt="show a random movie">
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
-
-<style lang="scss" scoped>
-@import '@/assets/scss/mixins.scss';
-@import '@/assets/scss/variables.scss';
-
-.movie {
-
-	&__info {
-
-		.title {
-			margin: 16px 0px;
-			@include zxcvbn3;
-
-			@media ($point1024) {
-				margin: 12px 0px;
-			}
-		}
-
-		.description {
-			display: -webkit-box;
-			-webkit-box-orient: vertical;
-			-webkit-line-clamp: 2;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			@include zxcvbn1;
-			// opacity: 0.7;
-		}
-
-		.info {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-			
-
-			& > div:not(.rating) {
-				@include zxcvbn5;
-				// opacity: 0.7;
-			}
-
-			.rating {
-				@include rating($green); // реализовать смену цветов в зависимости от рейтинга
-			}
-		}
-
-		.buttons {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 16px;
-			margin-top: 60px;
-
-			.button {
-				@include button;
-			}
-
-			@media ($point1024) {
-				margin-top: 20px;
-			}
-
-			@media ($point425) {
-				margin-top: 32px;
-				justify-content: space-between;
-			}
-		}
-	}
-}
-</style>

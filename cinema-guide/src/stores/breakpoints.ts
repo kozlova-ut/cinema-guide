@@ -6,6 +6,7 @@ export const useBreakpointsStore = defineStore('breakpoints', () => {
   const innerWidth = ref<number>(window.innerWidth);
 
   const breakpoints = computed<Breakpoints>(() => ({
+		xxs: innerWidth.value >=375,
 		xs: innerWidth.value >=425,
 		sm: innerWidth.value >=640,
 		md: innerWidth.value >=768,

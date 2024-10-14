@@ -7,6 +7,7 @@ export default {
   theme: {
     extend: {
 			screens: {
+				'xxs': '375px',
 				'xs': '425px'
 			},
 			fontFamily: {
@@ -17,7 +18,10 @@ export default {
 				'accent-main': '#6A5DC2',
 				'accent-additional': '#DC5DFC',
 				'gray': '#393B3C',
-				'green': '#308E21',
+				'rating-red': '#C82020',
+				'rating-gray': '#777777',
+				'rating-green': '#308E21',
+				'rating-gold': '#A59400',
 			}
 		},
   },

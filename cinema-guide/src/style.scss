@@ -19,7 +19,7 @@
 
 @layer components {
 	.wrapper {
-		@apply max-w-[1360px] mx-auto px-5 xs:px-10
+		@apply max-w-[1360px] mx-auto px-5 xs:px-10 w-full
 	}
 
 	.router-link {
@@ -43,5 +43,18 @@
 		background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.5) 20.41%, rgba(0, 0, 0, 0) 100%);
 		transform: rotate(-180deg);
 		@apply md:rotate-0;
+	}
+
+	.button {
+		@apply inline-block bg-gray rounded-[28px] py-4 px-4 xxs:px-[22px] font-play-bold text-lg/6 text-center
+	}
+}
+
+@layer utilities {
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		text-overflow: ellipsis;	
 	}
 }
