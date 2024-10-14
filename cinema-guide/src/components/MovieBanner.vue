@@ -41,13 +41,13 @@ onMounted(() => {
 </script>
 
 <template>
-	<div class="banner" v-if="movie"> <!-- подумать что будет если фильм не загрузится -->
-		<div class="movie__image">
-			<div class="img" :style="{backgroundImage: `url(${movie.posterUrl})`}"></div>
-			<div class="overlay"></div>
+	<div class="relative aspect-[2.465753424657534]" v-if="movie"> <!-- подумать что будет если фильм не загрузится -->
+		<div class="aspect-[1.541095890410959] relative md:w-[62.5%] md:absolute md:right-0">
+			<div class="w-full h-full bg-no-repeat bg-cover bg-center" :style="{backgroundImage: `url(${movie.posterUrl})`}"></div>
+			<div class="overlay overlay-gradient absolute top-0 w-full h-full"></div>
 		</div>
-		<div class="movie__info">
-			<div class="content">
+		<div class="movie__info py-6 px-5 md:relative md:max-w-screen-md lg:absolute lg:top-0 lg:bottom-0 lg:left-0 lg:px-20 lg:flex lg:items-center">
+			<div>
 				<div class="info">
 					<div class="rating">{{ formatRating(movie.tmdbRating) }}</div>
 					<div class="year">{{ movie.releaseYear }}</div>
@@ -74,7 +74,6 @@ onMounted(() => {
 				</div>
 			</div>
 		</div>
-
 	</div>
 </template>
 
@@ -82,22 +81,9 @@ onMounted(() => {
 @import '@/assets/scss/mixins.scss';
 @import '@/assets/scss/variables.scss';
 
-.banner {
-	position: relative;
-	aspect-ratio: 2.465753424657534;
-}
-
 .movie {
 
 	&__info {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	max-width: 760px;
-	padding: 0px 80px;
-	display: flex;
-	align-items: center;
 
 		.title {
 			margin: 16px 0px;
@@ -115,7 +101,7 @@ onMounted(() => {
 			overflow: hidden;
 			text-overflow: ellipsis;
 			@include zxcvbn1;
-			opacity: 0.7;
+			// opacity: 0.7;
 		}
 
 		.info {
@@ -126,7 +112,7 @@ onMounted(() => {
 
 			& > div:not(.rating) {
 				@include zxcvbn5;
-				opacity: 0.7;
+				// opacity: 0.7;
 			}
 
 			.rating {
@@ -152,53 +138,6 @@ onMounted(() => {
 				margin-top: 32px;
 				justify-content: space-between;
 			}
-		}
-
-		@media ($point1024) {
-			padding: 0px 40px;
-		}
-
-		@media ($point768) {
-			position: relative;
-			padding: 24px 20px;
-		}
-
-		@media ($point425) {
-			padding: 32px 20px;
-		}
-	}
-
-	&__image {
-		position: absolute;
-		top: 0px;
-		right: 0px;
-		width: 62.5%;
-		height: auto;
-		aspect-ratio: 1.541095890410959;
-		
-		.img {
-			width: 100%;
-			height: 100%;
-			background-repeat: no-repeat;
-			background-size: cover;
-			background-position: center;
-		}
-
-		.overlay {
-			position: absolute;
-			top: 0;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.5) 20.41%, rgba(0, 0, 0, 0) 100%);
-
-			@media ($point768) {
-				transform: rotate(-180deg)
-			}
-		}
-
-		@media ($point768) {
-			position: relative;
-			width: 100%;
 		}
 	}
 }

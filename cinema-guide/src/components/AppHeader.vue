@@ -9,105 +9,29 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 </script>
 
 <template>
-	<header class="header">
-		<div class="container">
-			<div class="header__content">
-				<RouterLink to="/" class="logo">
+	<header class="sticky top-0 z-50 bg-black/90">
+		<div class="wrapper">
+			<div class="py-8 flex gap-0 lg:gap-20 items-center">
+				<RouterLink to="/" class="border-none">
 					<AppLogo />
 				</RouterLink>
-				<div class="header__nav">
-					<nav>
-						<RouterLink to="/" v-if="!breakpoints.point768">
-							Главная
+				<div class="flex grow items-center justify-end lg:justify-normal">
+					<nav class="flex items-center">
+						<RouterLink class="router-link py-2 mr-10" to="/" v-if="breakpoints.md">
+							<span class="text-2xl">Главная</span>
 						</RouterLink>
-						<RouterLink class="genres" to="/genres">
-							<img v-if="breakpoints.point768" src="@/assets/img/genres.svg" alt="Жанры">
-							<span v-else>Жанры</span>
+						<RouterLink class="router-link py-2 mr-5 md:mr-10" to="/genres">
+							<span class="text-2xl" v-if="breakpoints.md">Жанры</span>
+							<img v-else src="@/assets/img/genres.svg" alt="Жанры">
 						</RouterLink>
 					</nav>
-					<div class="search"><AppSearch /></div>
+					<div class="flex w-auto mr-5 lg:w-full lg:mr-0"><AppSearch /></div>
 				</div>
-				<button>
-					<img v-if="breakpoints.point1024" src="@/assets/img/lk.svg" alt="Личный кабинет">
-					<span v-else>Войти</span>
+				<button class="text-2xl">
+					<span v-if="breakpoints.lg">Войти</span>
+					<img v-else src="@/assets/img/lk.svg" alt="Личный кабинет">
 				</button>
 			</div>
 		</div>
 	</header>
 </template>
-
-<style lang="scss" scoped>
-@import '@/assets/scss/mixins.scss';
-@import '@/assets/scss/variables.scss';
-
-.header {
-	position: sticky;
-	top: 0;
-	z-index: 100;
-	background: rgba(#000000, 0.9);
-
-	&__content {
-		width: 100%;
-		display: flex;
-		gap: 80px;
-		align-items: center;
-		padding: 32px 0px;
-
-		button {
-			display: flex;
-			border: none;
-			background: transparent;
-			cursor: pointer;
-			@include zxcvbn1;
-		}
-
-		@media ($point1024) {
-			gap: 0px;
-		}
-	}
-
-	&__nav {
-		display: flex;
-		flex-grow: 1;
-		align-items: center;
-
-		nav {
-			display: flex;
-			align-items: center;
-		}
-
-		a {
-			padding: 8px 0px;
-			margin-right: 40px;
-			@include zxcvbn1;
-
-			&.genres {
-				display: inline-flex;
-
-				@media ($point768) {
-					margin: 0px 20px;;
-				}
-			}
-
-			&.router-link-active {
-				border-bottom: 1.5px solid $accent-additional;
-			}
-		}
-
-		.search {
-			width: 100%;
-			display: flex;
-
-			@media ($point1024) {
-				width: auto;
-				margin-right: 20px;
-			}
-		}
-
-		@media ($point1024) {
-			justify-content: flex-end;
-		}
-	}
-}
-
-</style>

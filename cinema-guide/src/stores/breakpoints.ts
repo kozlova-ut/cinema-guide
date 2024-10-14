@@ -6,9 +6,12 @@ export const useBreakpointsStore = defineStore('breakpoints', () => {
   const innerWidth = ref<number>(window.innerWidth);
 
   const breakpoints = computed<Breakpoints>(() => ({
-		point1024: innerWidth.value <= 1024,
-		point768: innerWidth.value <= 768,
-    point425: innerWidth.value <= 425,
+		xs: innerWidth.value >=425,
+		sm: innerWidth.value >=640,
+		md: innerWidth.value >=768,
+		lg: innerWidth.value >=1024,
+		xl: innerWidth.value >=1280,
+		xxl: innerWidth.value >=1536,
   }));
 
   const handleResize = () => {

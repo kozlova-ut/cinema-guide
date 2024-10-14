@@ -8,39 +8,9 @@ const breakpoints = computed(() => breakpointsStore.breakpoints);
 </script>
 
 <template>
-<img v-if="breakpoints.point1024" src="@/assets/img/search.svg" alt="Поиск">
-<div class="search" v-else>
-	<input  type="text" placeholder="Поиск">
+<div v-if="breakpoints.lg" class="flex grow py-3 px-4 bg-gray rounded-lg">
+	<img src="@/assets/img/search.svg" class="w-6 h-6 mr-3 opacity-50" alt="icon">
+	<input class="w-full bg-transparent border-none outline-none text-lg/6" type="text" placeholder="Поиск">
 </div>
-
+<img v-else src="@/assets/img/search.svg" alt="Поиск">
 </template>
-
-<style lang="scss" scoped>
-@import '@/assets/scss/mixins.scss';
-@import '@/assets/scss/variables.scss';
-
-.search {
-	position: relative;
-	padding: 12px 16px 12px 52px;
-	flex-grow: 1;
-	background: $gray;
-	border-radius: 8px;
-	
-	input {
-		width: 100%;
-		background: none;
-		border: none;
-		outline: none;
-		@include zxcvbn2;
-	}
-
-	&::before {
-		content: url('@/assets/img/search.svg');
-		width: 24px;
-		height: 24px;
-		position: absolute;
-		left: 16px;
-		opacity: 0.5;
-	}
-}
-</style>

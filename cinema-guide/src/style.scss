@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: "Play-Bold";
+		src: url("@/assets/fonts/Play-Bold.woff2") format("woff2"), url("@/assets/fonts/Play-Bold.woff") format("woff");
+		font-weight: 700;
+	}
+	
+	@font-face {
+		font-family: "Play-Regular";
+		src: url("@/assets/fonts/Play-Regular.woff2") format("woff2"), url("@/assets/fonts/Play-Regular.woff") format("woff");
+		font-weight: 400;
+	}
+}
+
+
+@layer components {
+	.wrapper {
+		@apply max-w-[1360px] mx-auto px-5 xs:px-10
+	}
+
+	.router-link {
+		@apply md:border-b-[1.5px] md:border-transparent
+	}
+
+	.router-link-active {
+		@apply md:border-b-[1.5px] md:border-accent-additional
+	}
+
+	.logo linearGradient {
+		stop:first-child {
+			stop-color: theme('colors.accent-main');
+		}
+		stop:last-child {
+			stop-color: theme('colors.accent-additional');
+		}
+	}
+
+	.overlay-gradient {
+		background: linear-gradient(90deg, #000000 0%, rgba(0, 0, 0, 0.5) 20.41%, rgba(0, 0, 0, 0) 100%);
+		transform: rotate(-180deg);
+		@apply md:rotate-0;
+	}
+}
