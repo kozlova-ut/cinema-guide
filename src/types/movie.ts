@@ -1,10 +1,21 @@
 export interface IMovie {
-	id: number,
+    awardsSummary: string | null,
+    budget: string | null,
+    director: string | null,
+    genres: string[],
+    id: number,
+    language: string,
+    plot: string,
+    posterUrl: string,
+    production: string | null,
+    releaseYear: number,
+    revenue: string | null,
+    runtime: number,
 	title: string,
-	plot: string, 
-	tmdbRating: number, 
-	releaseYear: number,
-	genres: string[],
-	runtime: number,
-	posterUrl: string,
+    tmdbRating: number,   
+}
+
+export interface MovieDetail {
+    label: string;
+    value: string | null;
 }
