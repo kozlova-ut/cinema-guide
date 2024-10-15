@@ -71,7 +71,7 @@ onMounted(() => {
 						<button :class="['button bg-accent-main sm:px-12',  {'w-full': isHomePage && !breakpoints.sm, 'grow': !isHomePage && !breakpoints.md}]">
 							Трейлер
 						</button>
-						<RouterLink :to="`/movie/${movie?.id}`" class="button grow sm:grow-0 sm:px-12" v-if="isHomePage">
+						<RouterLink :to="`/movie/${movie.id}`" class="button grow sm:grow-0 sm:px-12" v-if="isHomePage">
 							О фильме
 						</RouterLink>
 						<button class="button">
