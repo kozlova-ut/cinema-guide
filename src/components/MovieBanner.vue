@@ -42,7 +42,7 @@ onMounted(() => {
 
 <template>
 	<div class="relative aspect-[2.465753424657534]" v-if="movie"> <!-- подумать что будет если фильм не загрузится -->
-		<div class="aspect-[1.541095890410959] relative md:w-[62.5%] md:absolute md:right-0">
+		<div class="aspect-[1.541095890410959] relative md:w-[62.5%] md:absolute md:right-0" v-if="breakpoints.md || movie.posterUrl">
 			<div class="w-full h-full bg-no-repeat bg-cover bg-center" :style="{backgroundImage: `url(${movie.posterUrl})`}"></div>
 			<div class="overlay overlay-gradient absolute top-0 w-full h-full"></div>
 		</div>
