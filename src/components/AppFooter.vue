@@ -10,7 +10,7 @@ const socials = [
 <template>
     <footer>
         <div class="wrapper">
-            <div class="py-10 md:flex justify-between items-center">
+            <div class="py-6 md:py-10 md:flex justify-between items-center">
                 <div class="lg:flex lg:gap-3 lg:items-center">
                     <span class="font-play-bold text-lg/6">
                         LLC «Мультимедиа Визион»
