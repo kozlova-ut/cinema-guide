@@ -18,17 +18,19 @@ const props = defineProps<{
 </script>
 
 <template>
-    <div v-if="breakpoints.md" class="flex flex-wrap gap-y-16 gap-x-[4.666%] lg:gap-x-[3.125%]">
-        <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie"
-            class="relative"
-        >
-            <template v-if="labels" v-slot:label>
-                <CardLabel :content="String(index + 1)" />
-            </template>
-        </MovieCard>
+    <div v-if="breakpoints.md" class="wrapper">
+        <div class="flex flex-wrap gap-y-16 gap-x-[4.666%] lg:gap-x-[3.125%]">
+            <MovieCard v-for="(movie, index) in movies" :key="index" :movie="movie"
+                class="relative"
+            >
+                <template v-if="labels" v-slot:label>
+                    <CardLabel :content="String(index + 1)" />
+                </template>
+            </MovieCard>
+        </div>
     </div>
-    <swiper-container v-else :width="264" class="-mx-10 -mt-10 -mb-[120px]">
-        <swiper-slide v-for="(movie, index) in movies" :key="index" class="pt-10 pb-8 pl-10">
+    <swiper-container v-else :width="264">
+        <swiper-slide v-for="(movie, index) in movies" :key="index" class="pt-10 pb-8 px-5 xs:pl-10 xs:pr-0">
             <MovieCard :movie="movie">
                 <template v-if="labels" v-slot:label>
                     <CardLabel :content="String(index + 1)" />
