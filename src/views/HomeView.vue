@@ -21,13 +21,13 @@ onMounted(() => {
 
 <template>
 	<MovieBanner />
-		<div class="wrapper">
-			<div class="pt-10 pb-[120px]">
+		<div class="pt-10 md:pb-[120px]">
+			<div class="wrapper">
 				<h1 class="font-play-bold text-2xl md:text-[40px]/[48px]">
 					Топ 10 фильмов
 				</h1>
-				
-				<MovieList :movies="movies" :labels="true" class="pt-10 md:pt-16" />
 			</div>
+			
+			<MovieList :movies="movies" :labels="true" class="md:pt-16" />
 		</div>
 </template>
