@@ -1,47 +1,31 @@
 <script lang="ts" setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
 import { useBreakpointsStore } from '@/stores/breakpoints';
 import type { IMovie } from '@/types/movie';
-import { getRandomMovie } from '@/api/movies';
 import { formatRating, formatDuration } from '@/utils/formatters';
 import { useRoute, RouterLink } from 'vue-router';
 
 const breakpointsStore = useBreakpointsStore();
 const breakpoints = computed(() => breakpointsStore.breakpoints);
 
-const movie = ref<IMovie | null>(null);
-
 const props = defineProps<{
-	currentMovie?: IMovie;
+	movie: IMovie;
+}>();
+
+const emit = defineEmits<{
+  (event: 'load-random-movie'): void;
 }>();
 
 const route = useRoute();
-
-
-const loadMovie = async () => {
-	if (props.currentMovie) {
-		movie.value = props.currentMovie;
-	}
-	else {
-		const response = await getRandomMovie();
-		if (response) {
-			movie.value = response;
-		}
-	}
-}
 
 const isHomePage = computed(() => {
     return route.name === 'home'; 
 }); 
 
-onMounted(() => {
-	loadMovie();
-});
-
 </script>
 
 <template>
-	<div class="relative aspect-[2.465753424657534]" v-if="movie"> <!-- подумать что будет если фильм не загрузится -->
+	<div v-if="movie" class="relative aspect-[2.465753424657534]"> 
 		<div class="aspect-[1.541095890410959] relative md:w-[62.5%] md:absolute md:right-0" v-if="breakpoints.md || movie.backdropUrl || movie.posterUrl">
 			<div class="w-full h-full bg-no-repeat bg-cover bg-center" :style="{backgroundImage: `url(${movie.backdropUrl || movie.posterUrl})`}"></div>
 			<div class="overlay overlay-gradient absolute top-0 w-full h-full"></div>
@@ -77,7 +61,7 @@ onMounted(() => {
 						<button class="button">
 							<img src="@/assets/img/favorites.svg" alt="add to favorites">
 						</button>
-						<button class="button" @click="loadMovie" v-if="isHomePage">
+						<button class="button" @click="emit('load-random-movie')" v-if="isHomePage">
 							<img src="@/assets/img/random.svg" alt="show a random movie">
 						</button>
 					</div>

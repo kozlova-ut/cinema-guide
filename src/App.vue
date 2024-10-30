@@ -5,9 +5,11 @@ import AppFooter from './components/AppFooter.vue';
 </script>
 
 <template>
-	<AppHeader />
-	<main>
-		<RouterView />
-	</main>
-	<AppFooter />
+	<div class="min-h-screen flex flex-col">
+		<AppHeader />
+		<main class="flex-grow">
+			<RouterView />
+		</main>
+		<AppFooter />
+	</div>
 </template>
