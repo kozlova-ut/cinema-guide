@@ -6,3 +6,9 @@ export interface Breakpoints {
 	xl: boolean,
 	xxl: boolean,
 }
+
+export interface ApiResponse<T> {
+	data: T | null;
+	hasError: boolean;
+	isLoading: boolean;
+}
