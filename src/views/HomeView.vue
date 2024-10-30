@@ -31,8 +31,17 @@ const loadMovies = async () => {
 }
 
 const loadNewRandomMovie = async () => {
-	const randomMovieApiResponse = await useApi(() => getRandomMovie());
+
+    randomMovieResponse.value = {
+        data: null,
+        hasError: false,
+        isLoading: true,
+    };
+
+    const randomMovieApiResponse = await useApi(() => getRandomMovie());
     randomMovieResponse.value = randomMovieApiResponse;
+
+    handleLoadingFinished();
 }
 
 const loadingFinished = ref(false);
