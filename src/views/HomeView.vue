@@ -5,7 +5,7 @@ import MovieBanner from '@/components/MovieBanner.vue';
 import MovieList from '@/components/MovieList.vue'
 import { getTop10, getRandomMovie } from '@/api/movies';
 import type { ApiResponse } from '@/types/service';
-import { useApi } from '@/utils/apiService';
+import { useApi } from '@/api/service';
 import LoadingStatus from '@/components/LoadingStatus.vue';
 
 const moviesResponse = ref<ApiResponse<IMovie[]>>({
@@ -66,7 +66,7 @@ onMounted(() => {
 					Топ 10 фильмов
 				</h1>
 			</div>
-			<MovieList :movies="moviesResponse.data" :labels="true" class="md:pt-16" />
+			<MovieList :movies="moviesResponse.data" :labels="true" />
 		</div>
 	</div>
 </template>

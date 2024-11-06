@@ -12,3 +12,12 @@ export const getMovieById = async(id:number): Promise<IMovie> => {
 export const getTop10 = async(): Promise<IMovie[]> => {
 	return fetchData<IMovie[]>('https://cinemaguide.skillbox.cc/movie/top10');
 }
+
+export const getGenres = async(): Promise<string[]> => {
+	return fetchData<string[]>('https://cinemaguide.skillbox.cc/movie/genres');
+}
+
+export const getMoviesByParams = async(params: Record<string, string>):Promise<IMovie[]> => {
+	const query = Object.entries(params).map(([key, value]) => `${key}=${value}`).join('&');
+	return fetchData<IMovie[]>(`https://cinemaguide.skillbox.cc/movie?${query}`)
+}
