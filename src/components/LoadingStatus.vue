@@ -28,8 +28,12 @@ watch([isLoading, hasError], ([loading, error]) => {
 </script>
 
 <template>
-    <div v-if="isLoading" class="py-10 text-center">
-        <span class="loader"></span>
+    <div v-if="isLoading">
+        <div class="wrapper">
+            <div class="py-10 text-center">
+                <span class="loader"></span>
+            </div>
+        </div>
     </div>
     <div v-if="hasError">
         <div class="wrapper">

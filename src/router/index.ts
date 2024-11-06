@@ -15,6 +15,11 @@ const router = createRouter({
 				component: () => import('../views/GenresView.vue')
 		},
 		{
+			path: '/genres/:genre',
+			name: 'genre',
+				component: () => import('../views/GenreView.vue')
+		},
+		{
 			path: '/movie/:id',
 			name: 'movie',
 				component: () => import('../views/MovieView.vue')

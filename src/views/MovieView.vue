@@ -7,7 +7,7 @@ import { useRoute } from 'vue-router';
 import { useBreakpointsStore } from '@/stores/breakpoints';
 import ISO6391 from 'iso-639-1';
 import type { ApiResponse } from '@/types/service';
-import { useApi } from '@/utils/apiService';
+import { useApi } from '@/api/service';
 import LoadingStatus from '@/components/LoadingStatus.vue';
 
 const breakpointsStore = useBreakpointsStore();

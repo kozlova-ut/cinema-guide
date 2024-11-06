@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { IMovie } from '@/types/movie';
-import { onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
@@ -13,7 +12,7 @@ const background = props.movie.posterUrl || props.movie.backdropUrl;
 
 <template>
     <RouterLink :to="`/movie/${movie.id}`"
-        :class="['relative block w-[224px] md:w-[21.5%] lg:w-[17.5%] aspect-[2/3] rounded-2xl card-glow', 
+        :class="['block w-[224px] md:w-[21.5%] lg:w-[17.5%] aspect-[2/3] rounded-2xl card-glow', 
             {'bg-no-repeat bg-cover bg-center': background},
             {'bg-black flex items-center justify-center': !background}
             ]" 
